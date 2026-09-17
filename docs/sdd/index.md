@@ -117,10 +117,3 @@ SDD.
 5. [Antipatrones](antipatrones.md) — errores frecuentes con síntoma, causa y
    contramedida.
 
-## Enlaces relacionados
-
-- [Setup del entorno](../setup/index.md) — instalación de Claude Code, Speckit y CodeGraph.
-- [CLAUDE.md](../claude-md/index.md) — cómo capturar convenciones de proyecto y usuario que Speckit heredará.
-- [App de ejemplo](../app-ejemplo/index.md) — CRUD Spring Boot 4 sobre el que se ilustra el caso guía.
-- [Agentes](../agentes/index.md) — agentes que complementan el flujo SDD.
-- [Skills](../skills/index.md) — skills reutilizables sobre Speckit.
