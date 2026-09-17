@@ -9,8 +9,8 @@ actual.
 
 ## Contexto del ejercicio
 
-La app `examples/user-crud-modern/` expone hoy un `GET /users` que devuelve
-todos los usuarios como array plano. La feature amplía ese endpoint para
+La app [luiszafra-sng/user-crud-modern](https://github.com/luiszafra-sng/user-crud-modern)
+expone hoy un `GET /users` que devuelve todos los usuarios como array plano. La feature amplía ese endpoint para
 soportar búsqueda, ordenación y paginación. Es representativa porque obliga
 a decisiones no triviales (semántica AND/OR entre filtros, sensibilidad a
 mayúsculas, orden por defecto, tamaño máximo de página, shape de la respuesta,
@@ -28,7 +28,8 @@ tests con MockMvc, sembrado runtime, H2 en memoria). Ver
     Todos los fragmentos `spec.md`, `plan.md`, `tasks.md`, contract y salidas
     de comandos que aparecen en esta página son **extractos ilustrativos**. No
     se generan dentro de este repositorio ni modifican la app
-    `examples/user-crud-modern/`, sus tests o `contracts/users-api.yaml`.
+    [luiszafra-sng/user-crud-modern](https://github.com/luiszafra-sng/user-crud-modern),
+    sus tests o `contracts/users-api.yaml`.
 
     El módulo está diseñado para que **tú reproduzcas el ciclo en tu
     máquina** sobre tu propia copia local de la app (o sobre un proyecto Java
@@ -38,8 +39,9 @@ tests con MockMvc, sembrado runtime, H2 en memoria). Ver
     detalle exacto variará ligeramente en cada ejecución.
 
     Prerequisitos: instalar Claude Code, Speckit y JDK/Maven vía SDKMAN según
-    el [Setup del entorno](../setup/index.md), y clonar el repo para tener la
-    app en `examples/user-crud-modern/`.
+    el [Setup del entorno](../setup/index.md), y clonar el repo
+    [luiszafra-sng/user-crud-modern](https://github.com/luiszafra-sng/user-crud-modern)
+    en tu máquina.
 
 ## Cómo reproducir esto en tu máquina
 
@@ -48,7 +50,7 @@ Checklist rápido antes de ejecutar el primer `/speckit-*`:
 1. **Claude Code** instalado y autenticado — [Setup > Claude Code](../setup/claude-code.md).
 2. **Speckit** instalado (`speckit --version` responde) — [Setup del entorno](../setup/index.md).
 3. **SDKMAN + JDK 21 + Maven 3.9.x** — [Setup > SDKMAN](../setup/sdkman.md).
-4. **Copia local de la app**: `cd examples/user-crud-modern && ./mvnw -q -DskipTests package` compila sin errores.
+4. **Copia local de la app**: `git clone https://github.com/luiszafra-sng/user-crud-modern.git && cd user-crud-modern && ./mvnw -q -DskipTests package` compila sin errores.
 
 Cada bloque de comando de esta página es **copiable tal cual**. Los prompts
 para Claude Code se copian con el botón de la esquina del bloque; los pega en
@@ -56,14 +58,16 @@ tu terminal Claude Code sin ediciones.
 
 ### Inicializar Speckit en la app de ejemplo
 
-La app `examples/user-crud-modern/` es un proyecto Spring Boot 4 normal: **no
-tiene nada de Speckit**. Antes de ejecutar el ciclo tienes que inicializarlo
-tú, y ese paso también forma parte del aprendizaje. Se hace una única vez.
+La app [luiszafra-sng/user-crud-modern](https://github.com/luiszafra-sng/user-crud-modern)
+es un proyecto Spring Boot 4 normal: **no tiene nada de Speckit**. Antes de
+ejecutar el ciclo tienes que inicializarlo tú, y ese paso también forma parte
+del aprendizaje. Se hace una única vez.
 
 Desde la raíz de tu copia local de la app:
 
 ```bash
-cd examples/user-crud-modern
+git clone https://github.com/luiszafra-sng/user-crud-modern.git
+cd user-crud-modern
 speckit init .
 ```
 
@@ -496,7 +500,7 @@ Tras `/speckit-implement`, verifica manualmente en tu máquina:
 ### 1. Tests en verde
 
 ```bash
-cd examples/user-crud-modern
+cd user-crud-modern
 ./mvnw -q test
 ```
 

@@ -83,9 +83,9 @@ calidad en `checklists/requirements.md`.
 ```markdown
 ### User Story 2 - Reproducir el ciclo en su propia máquina (Priority: P1)
 
-Un profesional que ha leído el módulo abre una copia local de la app
-`examples/user-crud-modern/`, instala Speckit siguiendo la guía y ejecuta el
-ciclo completo del caso guía en su entorno.
+Un profesional que ha leído el módulo clona una copia local de la app
+[luiszafra-sng/user-crud-modern](https://github.com/luiszafra-sng/user-crud-modern),
+instala Speckit siguiendo la guía y ejecuta el ciclo completo del caso guía en su entorno.
 
 **Acceptance Scenarios**:
 1. Given el módulo publicado, When el alumno lee los prompts documentados,

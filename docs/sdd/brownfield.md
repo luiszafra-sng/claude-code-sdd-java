@@ -220,7 +220,7 @@ aplicado a la app de ejemplo.
 
 ## Enlaces relacionados
 
-- [Caso guía](caso-guia.md) — ejemplo brownfield puro sobre `user-crud-modern`.
+- [Caso guía](caso-guia.md) — ejemplo brownfield puro sobre [user-crud-modern](https://github.com/luiszafra-sng/user-crud-modern).
 - [Flujo Speckit paso a paso](flujo.md) — referencia de comandos.
 - [Greenfield](greenfield.md) — el otro escenario de adopción.
 - [Setup del entorno](../setup/index.md) — CodeGraph, SDKMAN, Speckit.

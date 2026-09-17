@@ -1,6 +1,6 @@
 # App de ejemplo (Spring Boot 4)
 
-CRUD de usuarios sobre **Spring Boot 4 + Java 21 + H2 en memoria**, ubicado en `examples/user-crud-modern/`. Es la aplicación de referencia para el resto de la formación, y en particular para el módulo de depuración asistida por Claude.
+CRUD de usuarios sobre **Spring Boot 4 + Java 21 + H2 en memoria**, publicado como repositorio independiente en [github.com/luiszafra-sng/user-crud-modern](https://github.com/luiszafra-sng/user-crud-modern). Es la aplicación de referencia para el resto de la formación, y en particular para el módulo de depuración asistida por Claude.
 
 ## Qué hace
 
@@ -54,7 +54,8 @@ Sin base de datos externa, sin autenticación, sin capa de caché. Nada que dist
 ## Cómo levantarla
 
 ```bash
-cd examples/user-crud-modern
+git clone https://github.com/luiszafra-sng/user-crud-modern.git
+cd user-crud-modern
 sdk env install    # instala JDK 21 y Maven 3.9.11 (una vez)
 sdk env            # activa las versiones en la shell
 ./mvnw spring-boot:run
@@ -67,7 +68,7 @@ sdk env            # activa las versiones en la shell
 
 Al arrancar, un `CommandLineRunner` siembra dos usuarios de ejemplo para poder probar `GET`, `PUT` y `DELETE` sin depender del endpoint de creación (que está bloqueado por el bug).
 
-Detalle completo de invocación (curl / httpie), tests y estructura del repositorio en `examples/user-crud-modern/README.md`.
+Detalle completo de invocación (curl / httpie), tests y estructura del repositorio en el [`README.md`](https://github.com/luiszafra-sng/user-crud-modern/blob/main/README.md) del proyecto.
 
 ## Siguientes pasos
 

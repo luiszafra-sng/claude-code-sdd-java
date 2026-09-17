@@ -110,7 +110,7 @@ orden declarado.
 
 ## Invocación sobre el bug del CRUD
 
-Con la app CRUD levantada (`cd examples/user-crud-modern && ./mvnw spring-boot:run`),
+Con la app CRUD del repo [luiszafra-sng/user-crud-modern](https://github.com/luiszafra-sng/user-crud-modern) levantada (`./mvnw spring-boot:run` en la raíz del clon),
 reproduce el bug con:
 
 ```bash
