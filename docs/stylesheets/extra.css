@@ -106,11 +106,14 @@ body {
 }
 
 .md-header,
-.md-main,
 .md-tabs,
 .md-footer {
   position: relative;
   z-index: 1;
+}
+
+.md-main {
+  position: relative;
 }
 
 /* -------------------------------------------------------------------------
@@ -252,6 +255,30 @@ body {
 .md-search {
   position: relative;
   z-index: 5;
+}
+
+/* Mobile: el drawer y su overlay deben ir por encima del header sticky,
+ * con fondo opaco para tapar el header en vez de dejarlo traspasar. */
+@media screen and (max-width: 76.1875em) {
+  .md-header {
+    z-index: 3 !important;
+  }
+  .md-overlay {
+    z-index: 4 !important;
+  }
+  .md-sidebar,
+  .md-sidebar--primary,
+  [data-md-component="sidebar"] {
+    z-index: 5 !important;
+  }
+  .md-sidebar--primary,
+  .md-sidebar--primary .md-sidebar__scrollwrap {
+    background-color: var(--md-default-bg-color) !important;
+  }
+  [data-md-color-scheme="slate"] .md-sidebar--primary,
+  [data-md-color-scheme="slate"] .md-sidebar--primary .md-sidebar__scrollwrap {
+    background-color: #071c2b !important;
+  }
 }
 
 .md-search__output,
@@ -468,6 +495,12 @@ body {
   line-height: 1.4;
   padding: 0 0.6rem 0.8rem;
   white-space: normal;
+}
+
+/* Oculta logo grande dentro del drawer mobile (ya se muestra en el header). */
+.md-nav--primary .md-nav__title .md-nav__button.md-logo,
+.md-nav--primary .md-nav__title .md-logo {
+  display: none !important;
 }
 
 /* Items de nivel raíz en el sidebar izquierdo (secciones Y páginas sueltas
