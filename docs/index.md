@@ -42,9 +42,9 @@ concreto.
 - [Setup del entorno](setup/index.md) — instalación y verificación de todas las herramientas.
 - [CLAUDE.md](claude-md/index.md) — buenas prácticas a nivel usuario y proyecto.
 - [App de ejemplo (Spring Boot 4)](app-ejemplo/index.md) — CRUD sobre H2 con un bug reproducible.
-- [SDD con Speckit](sdd/index.md) — flujo completo y diferencias greenfield / brownfield.
 - [Agentes](agentes/index.md) — qué son, cómo crearlos, ejemplos.
 - [Skills](skills/index.md) — qué son, cómo crearlas, ejemplos.
+- [SDD con Speckit](sdd/index.md) — flujo completo y diferencias greenfield / brownfield.
 
 !!! tip "Cómo leer esta formación"
     Se recomienda seguir el orden del mapa en una primera lectura. Para
