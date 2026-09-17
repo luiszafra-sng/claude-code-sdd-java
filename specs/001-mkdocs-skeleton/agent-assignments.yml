@@ -1,0 +1,116 @@
+# Agent Assignments
+# Feature: 001-mkdocs-skeleton (Esqueleto del sitio MkDocs de la formación)
+# Generated: 2026-09-16
+# Command: /speckit-agent-assign-assign
+
+agents_scanned:
+  - name: "frontend-architect"
+    source: "user"
+    description: "React + TypeScript + Vite + MUI + TanStack Query/Table + Recharts."
+  - name: "java-legacy-analyst"
+    source: "user"
+    description: "Java legacy audit reports (Spring Boot/MVC/Jakarta/Quarkus). Read-only."
+  - name: "mui-ux-auditor"
+    source: "user"
+    description: "MUI v9 API + UX auditor for React/TS components."
+  - name: "python-backend-engineer"
+    source: "user"
+    description: "FastAPI + SQLAlchemy + Pydantic v2 + PostgreSQL production backends."
+  - name: "python-static-analysis-remediator"
+    source: "user"
+    description: "ruff/mypy/bandit/semgrep/pip-audit/gitleaks pipeline with auto-remediation."
+  - name: "rfp-analyst"
+    source: "user"
+    description: "RFP/SOW/technical specification analysis and planning."
+
+assignments:
+  T001:
+    agent: "default"
+    reason: "Plain .gitignore; no specialized agent domain."
+  T002:
+    agent: "default"
+    reason: "pyproject.toml minimal metadata; python-backend-engineer is FastAPI/SQLAlchemy-scoped, not a fit."
+  T003:
+    agent: "default"
+    reason: ".python-version pin; config file."
+  T004:
+    agent: "default"
+    reason: "Initial uv sync; environment bootstrap."
+  T005:
+    agent: "default"
+    reason: "uv add MkDocs deps; dependency management outside available agents' domains."
+  T006:
+    agent: "default"
+    reason: "Directory scaffolding."
+  T007:
+    agent: "default"
+    reason: "mkdocs.yml configuration; no MkDocs-aware agent available."
+  T008:
+    agent: "default"
+    reason: "Plain CSS tokens; frontend-architect is React/MUI-scoped, not applicable."
+  T009:
+    agent: "default"
+    reason: "SVG placeholder asset."
+  T010:
+    agent: "default"
+    reason: "SVG favicon placeholder asset."
+  T011:
+    agent: "default"
+    reason: "Markdown home page authoring."
+  T012:
+    agent: "default"
+    reason: "Markdown placeholder page."
+  T013:
+    agent: "default"
+    reason: "Markdown placeholder page."
+  T014:
+    agent: "default"
+    reason: "Markdown placeholder page."
+  T015:
+    agent: "default"
+    reason: "Markdown placeholder page."
+  T016:
+    agent: "default"
+    reason: "Markdown placeholder page."
+  T017:
+    agent: "default"
+    reason: "Markdown placeholder page."
+  T018:
+    agent: "default"
+    reason: "Markdown placeholder page."
+  T019:
+    agent: "default"
+    reason: "Manual verification of mkdocs serve."
+  T020:
+    agent: "default"
+    reason: "mkdocs build --strict verification."
+  T021:
+    agent: "default"
+    reason: "Shell sanity checks on site/ output."
+  T021b:
+    agent: "default"
+    reason: "Negative-path build verification with orphan file."
+  T022:
+    agent: "default"
+    reason: "README.md contributor guide authoring."
+  T023:
+    agent: "default"
+    reason: "Manual validation of add-page flow."
+  T024:
+    agent: "default"
+    reason: "Manual validation of uv add/remove flow."
+  T025:
+    agent: "default"
+    reason: "Visual parity review; no MkDocs-aware agent available."
+  T026:
+    agent: "default"
+    reason: "Lighthouse accessibility audit; no WCAG-focused agent among the available set."
+  T027:
+    agent: "default"
+    reason: "Manual accessibility spot-checks (alt, focus, headings)."
+  T028:
+    agent: "default"
+    reason: "Run quickstart.md scenarios end-to-end."
+  T029:
+    agent: "default"
+    reason: "Final mkdocs build --strict + tree sanity."

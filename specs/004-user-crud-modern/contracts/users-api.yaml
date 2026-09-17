@@ -1,0 +1,224 @@
+openapi: 3.1.0
+info:
+  title: user-crud-modern — Users API
+  version: 0.1.0
+  description: |
+    CRUD de usuarios sobre Spring Boot 4 + Java 21 + H2 en memoria, usado como
+    ejemplo formativo. Incluye un bug reproducible intencionado en `POST /users`
+    (ver `BUG.md` en el proyecto). Este contrato describe el comportamiento
+    **esperado tras el fix**; en el estado con bug, `POST /users` responde `500`
+    en lugar de `201`.
+servers:
+  - url: http://localhost:8080
+    description: Local dev (Spring Boot embedded Tomcat)
+paths:
+  /users:
+    get:
+      summary: Lista todos los usuarios
+      operationId: listUsers
+      responses:
+        '200':
+          description: Colección de usuarios (vacía si no hay ninguno).
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserResponse'
+    post:
+      summary: Crea un usuario
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+      responses:
+        '201':
+          description: Usuario creado.
+          headers:
+            Location:
+              description: URL del recurso creado.
+              schema: { type: string, format: uri }
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '409':
+          $ref: '#/components/responses/EmailConflict'
+        '500':
+          description: |
+            Estado con bug: NPE en el flujo de creación. El cuerpo puede ser el
+            error genérico de Spring Boot; el log muestra la traza completa.
+            **Comportamiento intencional para la formación**; desaparece cuando
+            se aplique el fix del mapper.
+  /users/{id}:
+    parameters:
+      - $ref: '#/components/parameters/UserIdParam'
+    get:
+      summary: Obtiene un usuario por id
+      operationId: getUser
+      responses:
+        '200':
+          description: Usuario.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '404':
+          $ref: '#/components/responses/UserNotFound'
+    put:
+      summary: Reemplaza un usuario existente
+      operationId: replaceUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+      responses:
+        '200':
+          description: Usuario actualizado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '404':
+          $ref: '#/components/responses/UserNotFound'
+        '409':
+          $ref: '#/components/responses/EmailConflict'
+    delete:
+      summary: Elimina un usuario
+      operationId: deleteUser
+      responses:
+        '204':
+          description: Eliminado.
+        '404':
+          $ref: '#/components/responses/UserNotFound'
+components:
+  parameters:
+    UserIdParam:
+      name: id
+      in: path
+      required: true
+      schema: { type: integer, format: int64, minimum: 1 }
+  schemas:
+    CreateUserRequest:
+      type: object
+      required: [name, email]
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: "Ana Torres"
+        email:
+          type: string
+          format: email
+          maxLength: 200
+          example: "ana.torres@example.com"
+    UpdateUserRequest:
+      allOf:
+        - $ref: '#/components/schemas/CreateUserRequest'
+    UserResponse:
+      type: object
+      required: [id, name, email, createdAt]
+      properties:
+        id: { type: integer, format: int64, example: 1 }
+        name: { type: string, example: "Ana Torres" }
+        email:
+          type: string
+          format: email
+          description: Persistido en minúsculas tras la normalización.
+          example: "ana.torres@example.com"
+        createdAt:
+          type: string
+          format: date-time
+          example: "2026-09-16T09:30:00Z"
+    ProblemDetail:
+      description: |
+        Respuesta de error siguiendo RFC 7807 (`application/problem+json`),
+        implementada con `org.springframework.http.ProblemDetail` de Spring 6 /
+        Boot 4. Los campos `code` y `fieldErrors` son propiedades extra
+        añadidas via `setProperty(...)` y aparecen como campos top-level del JSON.
+      type: object
+      required: [type, title, status, detail]
+      properties:
+        type:
+          type: string
+          format: uri
+          default: about:blank
+          example: about:blank
+        title:
+          type: string
+          example: "Validation Error"
+        status:
+          type: integer
+          example: 400
+        detail:
+          type: string
+          example: "El cuerpo de la petición contiene errores de validación."
+        instance:
+          type: string
+          format: uri
+          nullable: true
+        code:
+          type: string
+          description: Propiedad extra — identificador estable de la clase de error.
+          enum: [VALIDATION_ERROR, USER_NOT_FOUND, EMAIL_ALREADY_EXISTS]
+        fieldErrors:
+          type: array
+          description: Propiedad extra — presente sólo en VALIDATION_ERROR.
+          items:
+            $ref: '#/components/schemas/FieldError'
+    FieldError:
+      type: object
+      required: [field, message]
+      properties:
+        field: { type: string, example: "email" }
+        message: { type: string, example: "no debe estar en blanco" }
+  responses:
+    ValidationError:
+      description: Payload inválido según validación Jakarta.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+          example:
+            type: about:blank
+            title: "Validation Error"
+            status: 400
+            detail: "El cuerpo de la petición contiene errores de validación."
+            code: VALIDATION_ERROR
+            fieldErrors:
+              - field: email
+                message: "no debe estar en blanco"
+    UserNotFound:
+      description: No existe usuario con ese id.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+          example:
+            type: about:blank
+            title: "User Not Found"
+            status: 404
+            detail: "Usuario 42 no encontrado."
+            code: USER_NOT_FOUND
+    EmailConflict:
+      description: Ya existe un usuario con ese email (normalizado a minúsculas).
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+          example:
+            type: about:blank
+            title: "Email Already Exists"
+            status: 409
+            detail: "El email indicado ya está registrado."
+            code: EMAIL_ALREADY_EXISTS

@@ -1,0 +1,124 @@
+site_name: Formación Claude Code + SDD (Speckit) para Java
+site_description: Formación práctica de Claude Code y Spec-Driven Development con Speckit, orientada a proyectos Java modernos y legacy.
+site_url: https://luiszafra-sng.github.io/claude-code-sdd-java/
+docs_dir: docs
+
+exclude_docs: |
+  sdd/_snippets/
+
+not_in_nav: |
+  publicacion.md
+
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+  anchors: warn
+  nav:
+    omitted_files: warn
+    not_found: warn
+    absolute_links: warn
+
+theme:
+  name: material
+  language: es
+  logo: assets/logo.svg
+  favicon: assets/favicon.ico
+  font:
+    text: Inter
+    code: IBM Plex Mono
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - content.code.copy
+    - content.code.annotate
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Cambiar a modo claro
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Cambiar a modo oscuro
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Cambiar a modo automático
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - https://unpkg.com/mermaid@11.4.0/dist/mermaid.min.js
+  - assets/js/mermaid-init.js
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets:
+      base_path:
+        - docs
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Setup del entorno:
+      - setup/index.md
+      - Claude Code: setup/claude-code.md
+      - RTK: setup/rtk.md
+      - Caveman: setup/caveman.md
+      - CodeGraph: setup/codegraph.md
+      - SDKMAN: setup/sdkman.md
+      - Verificación: setup/verificacion.md
+  - CLAUDE.md:
+      - claude-md/index.md
+      - Capa usuario: claude-md/usuario.md
+      - Capa proyecto: claude-md/proyecto.md
+      - Buenas prácticas: claude-md/buenas-practicas.md
+      - Antipatrones: claude-md/antipatrones.md
+  - App de ejemplo:
+      - app-ejemplo/index.md
+      - Reproducir el bug: app-ejemplo/reproducir-bug.md
+      - Depurando con Claude: app-ejemplo/depurando-con-claude.md
+  - Agentes:
+      - agentes/index.md
+      - Anatomía: agentes/anatomia.md
+      - Memoria y modelos: agentes/memoria-modelos.md
+      - Alcance: agentes/alcance.md
+      - Catálogo: agentes/catalogo.md
+      - Crear un agente: agentes/crear-uno.md
+  - Skills:
+      - skills/index.md
+      - Anatomía: skills/anatomia.md
+      - Alcance: skills/alcance.md
+      - Catálogo: skills/catalogo.md
+      - Crear una skill: skills/crear-una.md
+  - SDD con Speckit:
+      - sdd/index.md
+      - Flujo Speckit: sdd/flujo.md
+      - Caso guía: sdd/caso-guia.md
+      - Greenfield: sdd/greenfield.md
+      - Brownfield: sdd/brownfield.md
+      - Antipatrones: sdd/antipatrones.md

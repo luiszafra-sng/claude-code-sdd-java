@@ -1,0 +1,598 @@
+/*
+ * Tokens visuales únicos del sitio (Principio I de la constitution).
+ *
+ * Look editorial oscuro: gradiente radial púrpura/azul, tipografía display
+ * fina (Inter weight 200), acento verde-cian frío, superficies translúcidas.
+ * Modo claro: paleta neutra coherente.
+ */
+
+/* Cargamos Inter en toda su variable-font (weights 100–900) para tener
+ * disponible el weight 200 que exige la referencia en los títulos. */
+@import url("https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Inter:wght@100..900&family=JetBrains+Mono:wght@400;500;600;700&display=swap");
+
+/* -------------------------------------------------------------------------
+ * Paletas
+ * ------------------------------------------------------------------------- */
+
+:root,
+[data-md-color-scheme="default"] {
+  /* Header integrado con el body (paleta clara neutra) */
+  --md-primary-fg-color:            #F4F4F0;
+  --md-primary-fg-color--light:     #FAFAF7;
+  --md-primary-fg-color--dark:      #E9E9E4;
+  --md-primary-bg-color:            #0A0D1F;
+  --md-primary-bg-color--light:     rgba(10, 13, 31, 0.72);
+
+  /* Acento — verde cian de la referencia */
+  --md-accent-fg-color:             #006acb;
+  --md-accent-fg-color--transparent: rgba(0, 106, 203, 0.12);
+  --md-accent-bg-color:             #F4F4F0;
+  --md-accent-bg-color--light:      rgba(244, 244, 240, 0.72);
+
+  --md-default-bg-color:            #FFFFFF;
+  --md-default-fg-color:            rgba(10, 13, 31, 0.88);
+  --md-default-fg-color--light:     rgba(10, 13, 31, 0.62);
+  --md-default-fg-color--lighter:   rgba(10, 13, 31, 0.32);
+  --md-default-fg-color--lightest:  rgba(10, 13, 31, 0.06);
+
+  --md-typeset-color:               #0A0D1F;
+  --md-typeset-a-color:             #006acb;
+
+  --md-code-bg-color:               rgba(10, 13, 31, 0.06);
+  --md-code-fg-color:               #0A0D1F;
+
+  --md-footer-bg-color:             #0A0D1F;
+  --md-footer-bg-color--dark:       #05070F;
+
+  --md-text-font: "Commissioner", "Avenir Next", "Segoe UI", sans-serif;
+  --md-code-font: "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* Tokens custom del sitio */
+  --sn-bg-radial: radial-gradient(ellipse at 80% -10%, #E7DAFF 0%, transparent 55%),
+                  radial-gradient(ellipse at 10% 100%, #D6E3FF 0%, transparent 60%);
+  --sn-hairline: rgba(10, 13, 31, 0.10);
+  --sn-panel-bg: rgba(255, 255, 255, 0.55);
+  --sn-panel-border: rgba(10, 13, 31, 0.10);
+}
+
+[data-md-color-scheme="slate"] {
+  /* Header transparente sobre el body oscuro */
+  --md-primary-fg-color:            #0A0D1F;
+  --md-primary-fg-color--light:     #10142A;
+  --md-primary-fg-color--dark:      #05070F;
+  --md-primary-bg-color:            #F5F6FA;
+  --md-primary-bg-color--light:     rgba(245, 246, 250, 0.72);
+
+  --md-accent-fg-color:             #6cd5f8;
+  --md-accent-fg-color--transparent: rgba(108, 213, 248, 0.14);
+  --md-accent-bg-color:             #0A0D1F;
+  --md-accent-bg-color--light:      rgba(10, 13, 31, 0.72);
+
+  --md-default-bg-color:            #071c2b;
+  --md-default-fg-color:            rgba(245, 246, 250, 0.92);
+  --md-default-fg-color--light:     rgba(245, 246, 250, 0.62);
+  --md-default-fg-color--lighter:   rgba(245, 246, 250, 0.30);
+  --md-default-fg-color--lightest:  rgba(245, 246, 250, 0.07);
+
+  --md-typeset-color:               #F5F6FA;
+  --md-typeset-a-color:             #6cd5f8;
+
+  --md-code-bg-color:               rgba(245, 246, 250, 0.07);
+  --md-code-fg-color:               #F5F6FA;
+
+  --md-footer-bg-color:             #05070F;
+  --md-footer-bg-color--dark:       #000000;
+
+  --sn-bg-radial: radial-gradient(ellipse at 82% -8%, rgba(120, 78, 200, 0.55) 0%, transparent 55%),
+                  radial-gradient(ellipse at 8% 105%, rgba(38, 70, 150, 0.55) 0%, transparent 60%),
+                  radial-gradient(ellipse at 50% 40%, rgba(20, 30, 70, 0.35) 0%, transparent 70%);
+  --sn-hairline: rgba(245, 246, 250, 0.10);
+  --sn-panel-bg: rgba(255, 255, 255, 0.04);
+  --sn-panel-border: rgba(245, 246, 250, 0.12);
+}
+
+/* -------------------------------------------------------------------------
+ * Fondo con gradiente radial (referencia)
+ * ------------------------------------------------------------------------- */
+
+body {
+  background: var(--md-default-bg-color);
+  position: relative;
+  min-height: 100vh;
+}
+
+[data-md-color-scheme="slate"] body {
+  background: #071c2b;
+}
+
+.md-header,
+.md-main,
+.md-tabs,
+.md-footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* -------------------------------------------------------------------------
+ * Header estilo Singular — navy sólido, texto claro (ambos schemes)
+ * ------------------------------------------------------------------------- */
+
+:root,
+[data-md-color-scheme="default"] {
+  --sn-header-bg:     #EAECEF;
+  --sn-header-fg:     #0A0D1F;
+  --sn-header-muted:  rgba(10, 13, 31, 0.62);
+  --sn-header-hair:   rgba(10, 13, 31, 0.10);
+  --sn-header-field:  #FFFFFF;
+  --sn-header-border: rgba(10, 13, 31, 0.14);
+}
+
+[data-md-color-scheme="slate"] {
+  --sn-header-bg:     #03121df0;
+  --sn-header-fg:     #F5F6FA;
+  --sn-header-muted:  rgba(245, 246, 250, 0.72);
+  --sn-header-hair:   rgba(245, 246, 250, 0.10);
+  --sn-header-field:  rgba(245, 246, 250, 0.08);
+  --sn-header-border: rgba(245, 246, 250, 0.16);
+}
+
+.md-header {
+  background-color: var(--sn-header-bg) !important;
+  box-shadow: none;
+  border-bottom: 1px solid var(--sn-header-hair);
+  color: var(--sn-header-fg);
+}
+
+.md-header[data-md-state="shadow"],
+.md-header--shadow {
+  box-shadow: none;
+}
+
+.md-header__title {
+  color: var(--sn-header-fg);
+  display: flex;
+  align-items: center;
+}
+
+.md-header__topic,
+.md-header__ellipsis {
+  font-family: var(--md-text-font);
+  font-weight: 600;
+  font-variation-settings: "wght" 600;
+  letter-spacing: -0.02em;
+  color: var(--md-accent-fg-color);
+}
+
+.md-header__title::before {
+  content: "|";
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  margin: 0 0.9rem 0 0.2rem;
+  font-weight: 200;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: var(--sn-header-fg);
+  opacity: 0.4;
+}
+
+.md-header__button,
+.md-header .md-icon svg {
+  color: var(--sn-header-fg);
+  fill: currentColor;
+}
+
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 1.5rem;
+  color: var(--sn-header-fg);
+  fill: currentColor;
+}
+
+.md-header__button.md-logo svg path {
+  fill: currentColor;
+}
+
+/* MkDocs Material sirve el logo como <img>, así que currentColor no llega
+ * al SVG. Invertimos en modo oscuro para que quede blanco sobre navy. */
+[data-md-color-scheme="slate"] .md-header__button.md-logo img {
+  filter: invert(1) brightness(2);
+}
+
+/* Buscador — adapta a scheme */
+.md-search__form {
+  background-color: var(--sn-header-field) !important;
+  border: 1px solid var(--sn-header-border) !important;
+  border-radius: 999px !important;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 1px 2px rgba(10, 13, 31, 0.04);
+  overflow: hidden;
+}
+
+[data-md-color-scheme="default"] .md-search__form {
+  background-color: #FFFFFF !important;
+  border-color: rgba(10, 13, 31, 0.28) !important;
+  box-shadow: 0 1px 3px rgba(10, 13, 31, 0.08);
+}
+
+.md-search__input {
+  background-color: transparent !important;
+}
+
+.md-search__form:hover {
+  background-color: var(--sn-header-field);
+  filter: brightness(0.97);
+}
+
+[data-md-color-scheme="slate"] .md-search__form:hover {
+  background-color: rgba(245, 246, 250, 0.12);
+  filter: none;
+}
+
+.md-search__input,
+.md-search__icon {
+  color: var(--sn-header-fg);
+  font-family: var(--md-text-font);
+}
+
+.md-search__icon svg {
+  fill: currentColor;
+}
+
+.md-search__input::placeholder {
+  color: var(--sn-header-muted);
+  font-family: var(--md-text-font);
+}
+
+/* Panel de resultados — fondo opaco y por encima de tabs/contenido */
+.md-header {
+  z-index: 4;
+}
+
+.md-search {
+  position: relative;
+  z-index: 5;
+}
+
+.md-search__output,
+.md-search__scrollwrap,
+.md-search-result,
+.md-search-result__meta {
+  background-color: #FFFFFF !important;
+}
+
+[data-md-color-scheme="slate"] .md-search__output,
+[data-md-color-scheme="slate"] .md-search__scrollwrap,
+[data-md-color-scheme="slate"] .md-search-result,
+[data-md-color-scheme="slate"] .md-search-result__meta {
+  background-color: #071c2b !important;
+}
+
+.md-search__output {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--sn-header-hair);
+  border-top: none;
+}
+
+.md-search-result__meta {
+  color: var(--md-default-fg-color--light);
+  border-bottom: 1px solid var(--sn-hairline);
+}
+
+.md-search-result__item + .md-search-result__item {
+  border-top: 1px solid var(--sn-hairline);
+}
+
+.md-search-result__link:focus,
+.md-search-result__link:hover {
+  background-color: var(--md-accent-fg-color--transparent) !important;
+}
+
+/* Overlay oscuro tras la búsqueda (móvil / focus) */
+.md-search__overlay {
+  background-color: rgba(3, 18, 29, 0.6);
+}
+
+/* Tabs superiores (nav principal) */
+.md-tabs {
+  background-color: var(--sn-header-bg);
+  border-bottom: 1px solid var(--sn-header-hair);
+  color: var(--sn-header-fg);
+}
+
+.md-tabs__link {
+  font-family: var(--md-text-font);
+  font-weight: 200;
+  font-variation-settings: "wght" 220;
+  font-size: 0.95rem;
+  letter-spacing: -0.025em;
+  color: var(--sn-header-fg);
+  opacity: 0.72;
+  transition: opacity 120ms ease;
+}
+
+.md-tabs__item--active .md-tabs__link,
+.md-tabs__link--active,
+.md-tabs__link:hover {
+  opacity: 1;
+  color: var(--md-accent-fg-color);
+}
+
+/* -------------------------------------------------------------------------
+ * Tipografía editorial — H1 muy fino, tracking negativo (Söhne / Inter Display look)
+ * ------------------------------------------------------------------------- */
+
+.md-typeset {
+  font-family: var(--md-text-font);
+  font-feature-settings: "ss01", "cv11";
+  font-size: 0.72rem;
+  line-height: 1.65;
+  font-weight: 400;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6 {
+  font-family: var(--md-text-font);
+  font-weight: 200 !important;
+  font-variation-settings: "wght" 180;
+  letter-spacing: -0.035em;
+  color: var(--md-typeset-color);
+  line-height: 1.15;
+}
+
+.md-typeset h1 {
+  font-size: 2.25rem;
+  line-height: 1.05;
+  margin: 0 0 1.2rem;
+}
+
+.md-typeset h2 {
+  font-size: 1.6rem;
+  margin-top: 2.2em;
+  margin-bottom: 0.5em;
+}
+
+.md-typeset h3 {
+  font-size: 1.25rem;
+  margin-top: 1.6em;
+}
+
+.md-typeset h4 {
+  font-size: 1.05rem;
+  margin-top: 1.4em;
+}
+
+.md-typeset h5,
+.md-typeset h6 {
+  font-size: 0.9rem;
+  margin-top: 1.2em;
+}
+
+.md-typeset p {
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: var(--md-default-fg-color);
+}
+
+.md-typeset li {
+  font-size: 0.78rem;
+}
+
+.md-typeset strong {
+  font-weight: 600;
+  color: var(--md-typeset-color);
+}
+
+.md-typeset code {
+  font-family: var(--md-code-font);
+  font-size: 0.85em;
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  background: var(--md-code-bg-color);
+  color: var(--md-code-fg-color);
+  border: 1px solid var(--sn-hairline);
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.md-typeset a {
+  color: var(--md-typeset-a-color);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 120ms ease, border-color 120ms ease;
+}
+
+.md-typeset a:hover {
+  color: var(--md-accent-fg-color);
+  border-bottom-color: currentColor;
+}
+
+/* -------------------------------------------------------------------------
+ * Layout — hero editorial, sidebar/toc translúcidos
+ * ------------------------------------------------------------------------- */
+
+.md-main__inner {
+  margin-top: 2rem;
+}
+
+.md-content {
+  max-width: 48rem;
+}
+
+.md-content__inner {
+  padding-top: 2rem;
+}
+
+.md-sidebar {
+  background-color: transparent;
+}
+
+.md-sidebar__scrollwrap {
+  background-color: transparent;
+}
+
+.md-nav {
+  background-color: transparent;
+  font-size: 0.78rem;
+}
+
+.md-nav__title {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  color: var(--md-default-fg-color--light) !important;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0 0.6rem 0.8rem;
+}
+
+.md-nav__title .md-nav__button,
+.md-nav__title[for="__toc"],
+.md-nav__title[for] {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+/* Elimina el "back link" con fondo primario en sidebars scrollables (v9) */
+.md-nav--primary .md-nav__title[for="__drawer"],
+.md-nav--primary > .md-nav__title {
+  background-color: transparent !important;
+  color: var(--md-default-fg-color--light) !important;
+  box-shadow: none;
+  height: auto;
+  line-height: 1.4;
+  padding: 0 0.6rem 0.8rem;
+  white-space: normal;
+}
+
+/* Items de nivel raíz en el sidebar izquierdo (secciones Y páginas sueltas
+ * tipo "Home"): mismo tratamiento visual que "TABLA DE CONTENIDOS" a la
+ * derecha (uppercase + tracking + weight 600 + sin chip de fondo). */
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link,
+.md-nav--primary .md-nav__item--section > .md-nav__link {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--md-default-fg-color--light) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  padding: 0 0.6rem 0.8rem;
+  line-height: 1.4;
+}
+
+/* Estado activo/hover del item raíz: sin chip, solo cambio de color. */
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link:hover,
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link--active,
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link.md-nav__link--active,
+.md-nav--primary .md-nav__item--section > .md-nav__link:hover {
+  color: var(--md-accent-fg-color) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.md-nav__link {
+  font-size: 0.82rem;
+  color: var(--md-default-fg-color);
+  transition: color 120ms ease;
+}
+
+.md-nav__link:hover,
+.md-nav__link--active {
+  color: var(--md-accent-fg-color);
+}
+
+/* -------------------------------------------------------------------------
+ * Admonitions — cards translúcidas al estilo panel de la referencia
+ * ------------------------------------------------------------------------- */
+
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: 10px;
+  border: 1px solid var(--sn-panel-border);
+  border-left-width: 3px;
+  border-left-color: var(--md-accent-fg-color);
+  background: var(--sn-panel-bg);
+  backdrop-filter: blur(6px);
+  box-shadow: none;
+}
+
+.md-typeset .admonition-title,
+.md-typeset summary {
+  background: transparent !important;
+  color: var(--md-accent-fg-color);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.md-typeset .admonition-title::before,
+.md-typeset summary::before {
+  background-color: var(--md-accent-fg-color) !important;
+}
+
+/* -------------------------------------------------------------------------
+ * Focus visible — WCAG 2.1 AA
+ * ------------------------------------------------------------------------- */
+
+*:focus-visible {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* -------------------------------------------------------------------------
+ * Mermaid — legible en ambos temas, ancho amplio
+ * ------------------------------------------------------------------------- */
+
+.md-typeset .mermaid {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.md-typeset .mermaid svg {
+  max-width: 100%;
+  height: auto;
+  min-height: 360px;
+}
+
+.md-typeset .mermaid .edgeLabel {
+  background-color: var(--md-default-bg-color) !important;
+  color: var(--md-default-fg-color) !important;
+  padding: 0 4px;
+  font-size: 0.85em;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .mermaid .edgeLabel {
+  background-color: #071c2b !important;
+  color: var(--md-default-fg-color) !important;
+}
+
+/* Texto de nodos: blanco sobre fill accent (ambos classDef). Distinción visual via stroke. */
+.md-typeset .mermaid .node text,
+.md-typeset .mermaid .node .nodeLabel,
+.md-typeset .mermaid .node tspan,
+.md-typeset .mermaid .node foreignObject div {
+  fill: #ffffff !important;
+  color: #ffffff !important;
+  font-weight: 500;
+}
+
+/* -------------------------------------------------------------------------
+ * Footer sobrio
+ * ------------------------------------------------------------------------- */
+
+.md-footer {
+  background-color: var(--md-footer-bg-color);
+}
+
+.md-footer-meta {
+  background-color: var(--md-footer-bg-color--dark);
+}
