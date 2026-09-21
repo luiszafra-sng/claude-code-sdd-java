@@ -21,7 +21,6 @@ validation:
 
 theme:
   name: material
-  custom_dir: overrides
   language: es
   logo: assets/logo.svg
   favicon: assets/favicon.ico
