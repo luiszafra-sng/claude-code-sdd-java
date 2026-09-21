@@ -12,6 +12,7 @@ authors = [
 [dependency-groups]
 docs = [
     "mkdocs==1.6.1",
+    "mkdocs-git-revision-date-localized-plugin==1.6.0",
     "mkdocs-material==9.7.7",
     "pymdown-extensions==12.0.1",
 ]

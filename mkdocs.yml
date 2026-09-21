@@ -21,6 +21,7 @@ validation:
 
 theme:
   name: material
+  custom_dir: overrides
   language: es
   logo: assets/logo.svg
   favicon: assets/favicon.ico
@@ -62,6 +63,17 @@ extra_css:
 extra_javascript:
   - https://unpkg.com/mermaid@11.4.0/dist/mermaid.min.js
   - assets/js/mermaid-init.js
+
+extra:
+  generator: false
+
+plugins:
+  - search
+  - git-revision-date-localized:
+      enable_creation_date: false
+      locale: es
+      type: date
+      fallback_to_build_date: true
 
 markdown_extensions:
   - admonition
