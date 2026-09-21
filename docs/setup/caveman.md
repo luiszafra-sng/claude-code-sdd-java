@@ -133,5 +133,3 @@ No usarlo cuando:
 
 !!! info "Versión de referencia"
     Documentado sobre Caveman `main` en `2026-09-16`. **Verificado el 2026-09-16.**
-
-[← RTK](rtk.md) · [Siguiente: CodeGraph →](codegraph.md) · [Ir al checklist](verificacion.md)

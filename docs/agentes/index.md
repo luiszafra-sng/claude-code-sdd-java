@@ -76,5 +76,3 @@ que aporte contexto o ejecute algo dentro del hilo, es una skill.
   reutilizables.
 - [Crear uno](crear-uno.md) — paso a paso para construir un agente
   propio; caso guía `spring-boot-debugger` sobre el bug del CRUD.
-
-[← Volver a la home del sitio](../index.md)

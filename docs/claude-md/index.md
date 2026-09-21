@@ -99,5 +99,3 @@ Claude Code lo tenga en cuenta, cierra la sesión y ábrela de nuevo.
 Cuando termines este módulo, el siguiente paso natural es el módulo
 [SDD con Speckit](../sdd/index.md) *(spec 5 pendiente)*, que aplica lo
 aprendido dentro del flujo de Spec-Driven Development.
-
-[← Volver a la home del sitio](../index.md)

@@ -172,5 +172,3 @@ Con esto tienes teoría de skills, catálogo verificado y guía práctica
 para crear una propia. El siguiente módulo natural es
 [SDD con Speckit](../sdd/index.md), que aplica lo aprendido dentro
 del flujo de Spec-Driven Development.
-
-[← Volver al índice de Skills](index.md)

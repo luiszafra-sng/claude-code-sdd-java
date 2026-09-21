@@ -174,5 +174,3 @@ El detalle práctico de cuándo usar cada modo se cubre en el módulo
 
 !!! info "Versión de referencia"
     Documentado sobre Claude Code 1.6.x. **Verificado el 2026-09-16.**
-
-[← Índice del módulo](index.md) · [Siguiente: RTK →](rtk.md) · [Ir al checklist](verificacion.md)

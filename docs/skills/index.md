@@ -69,5 +69,3 @@ depender de skills preprecargadas.
   reutilizables.
 - [Crear una](crear-una.md) — paso a paso para construir una skill
   propia con ejemplo aplicado al CRUD.
-
-[← Volver a la home del sitio](../index.md)

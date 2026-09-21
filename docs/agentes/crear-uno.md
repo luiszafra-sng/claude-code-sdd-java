@@ -189,5 +189,3 @@ Con esto tienes: teoría de agentes, catálogo verificado y experiencia
 construyendo uno propio funcional. El siguiente módulo natural es
 [SDD con Speckit](../sdd/index.md), que aplica agentes dentro del
 flujo de especificación dirigida.
-
-[← Volver al índice de Agentes](index.md)

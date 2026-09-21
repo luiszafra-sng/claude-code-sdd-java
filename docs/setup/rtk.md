@@ -188,5 +188,3 @@ instalación oficial gane precedencia.
 
 !!! info "Versión de referencia"
     Documentado sobre RTK 0.7.x. **Verificado el 2026-09-16.**
-
-[← Claude Code](claude-code.md) · [Siguiente: Caveman →](caveman.md) · [Ir al checklist](verificacion.md)
