@@ -204,5 +204,3 @@ Cuando este checklist queda en verde, tu `CLAUDE.md` está listo para
 usarse. El siguiente paso natural es aplicar el flujo de
 [SDD con Speckit](../sdd/index.md) *(spec 5 pendiente)*, que usa este
 `CLAUDE.md` como base de contexto para redactar specs y planes.
-
-[← Capa proyecto](proyecto.md) · [Volver al índice del módulo](index.md) · [Siguiente: Antipatrones →](antipatrones.md)

@@ -122,5 +122,3 @@ Checklist rápido para revisar un `CLAUDE.md` (propio o ajeno):
 
 Cuando el checklist queda en verde, el archivo es apto para
 publicarse. Si algún ítem falla, hay que corregirlo antes de mergear.
-
-[← Buenas prácticas](buenas-practicas.md) · [Volver al índice del módulo](index.md)

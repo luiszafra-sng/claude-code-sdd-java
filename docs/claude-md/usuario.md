@@ -108,5 +108,3 @@ registro que prefieras.
 - **Reglas contradictorias**: si en la misma sección coexiste "MUST
   responder corto" y "MUST explicar detalladamente cada paso", Claude
   tenderá a interpretar de forma inconsistente. Consolida.
-
-[← Volver al índice del módulo](index.md) · [Siguiente: Capa proyecto →](proyecto.md)

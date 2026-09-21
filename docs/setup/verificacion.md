@@ -85,5 +85,3 @@ resto de la formación.
     Documentado sobre SDKMAN 5.19.0, BellSoft Liberica 21.0.4-librca,
     Maven 3.9.9, Claude Code 1.6.x, RTK 0.7.x, Caveman `main`,
     CodeGraph `main`. **Verificado el 2026-09-16.**
-
-[← SDKMAN](sdkman.md) · [Volver al índice del módulo](index.md)

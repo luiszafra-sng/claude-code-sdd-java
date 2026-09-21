@@ -168,5 +168,3 @@ el NPE en una sola iteración.
 
 !!! info "Versión de referencia"
     Documentado sobre CodeGraph `main` en `2026-09-16`. **Verificado el 2026-09-16.**
-
-[← Caveman](caveman.md) · [Siguiente: SDKMAN →](sdkman.md) · [Volver al índice del módulo](index.md)

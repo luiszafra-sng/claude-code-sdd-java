@@ -154,5 +154,3 @@ No se usa para:
 !!! info "Versión de referencia"
     Documentado sobre SDKMAN 5.19.0, BellSoft Liberica 21.0.4-librca,
     Maven 3.9.9. **Verificado el 2026-09-16.**
-
-[← CodeGraph](codegraph.md) · [Siguiente: Verificación →](verificacion.md) · [Volver al índice del módulo](index.md)

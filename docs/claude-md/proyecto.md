@@ -199,5 +199,3 @@ restricciones sobre `docs/stylesheets/extra.css`).
     constitution, etc.). Si detectas divergencias notables con los
     snippets estáticos de esta página, la fuente autorizada es el
     archivo vivo.
-
-[← Capa usuario](usuario.md) · [Volver al índice del módulo](index.md) · [Siguiente: Buenas prácticas →](buenas-practicas.md)
