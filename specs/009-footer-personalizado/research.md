@@ -105,17 +105,20 @@ extra:
 
 ## Decisión 5 — `custom_dir` en `mkdocs.yml`
 
-**Decision**: `custom_dir: overrides` se mantiene en `mkdocs.yml` aunque el directorio `overrides/partials/` esté vacío
+**Decision**: `custom_dir: overrides` eliminado de `mkdocs.yml`
 
 **Rationale**:
-- La directiva se añadió durante la implementación inicial del footer custom. Al revertir el override, el directorio queda vacío pero la directiva es inofensiva.
-- Mantenerla permite añadir futuros overrides de Material sin modificar `mkdocs.yml`.
-- Material ignora directorios de overrides vacíos sin emitir warnings.
+- La directiva se añadió durante la implementación inicial del footer custom. Al revertir el override, el directorio `overrides/` quedó vacío.
+- Git no trackea directorios vacíos → el directorio no existe en el entorno de CI → `mkdocs build --strict` falla con "The path set in custom_dir does not exist".
+- Al no haber ningún override activo, la directiva sobra y se eliminó.
 
-**Config final**:
+**Alternatives considered**:
+- Añadir `.gitkeep` en `overrides/` para forzar el tracking — funciona, pero mantiene una directiva activa que no hace nada; más confuso que eliminarla.
+
+**Config final** (sin `custom_dir`):
 ```yaml
 theme:
   name: material
-  custom_dir: overrides
-  # generator: false NO va aquí — va bajo extra: (ver Decisión 3)
+  language: es
+  # ... resto de config; sin custom_dir
 ```

@@ -69,6 +69,6 @@ docs/
     └── extra.css            # .md-source-file { text-align: right }
 ```
 
-**No creados** (descartados durante implementación):
-- `overrides/partials/footer.html` — se usó el footer nativo de Material
+**No creados / descartados durante implementación**:
+- `overrides/partials/footer.html` — se usó el footer nativo de Material; `custom_dir: overrides` también eliminado de `mkdocs.yml` (git no trackea directorios vacíos → fallo en CI)
 - Clases CSS `.sng-footer*` — no requeridas sin footer custom

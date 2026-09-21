@@ -13,7 +13,7 @@
 ## Phase 1: Setup (Infraestructura compartida)
 
 - [X] T001 Instalar `mkdocs-git-revision-date-localized-plugin` con `uv add --group docs mkdocs-git-revision-date-localized-plugin`, obtener versión resuelta de `uv.lock`, y fijar la entrada en `pyproject.toml` como `mkdocs-git-revision-date-localized-plugin==1.6.0` (cumple FR-005)
-- [X] T002 [P] Crear directorio `overrides/partials/` en la raíz del repositorio
+- [X] ~~T002 [P] Crear directorio `overrides/partials/` en la raíz del repositorio~~ *(revertido junto con el footer custom)*
 - [X] T003 Ejecutar `uv sync` para regenerar `uv.lock` con la dependencia pinada y verificar que el entorno no tiene conflictos
 
 **Checkpoint**: Dependencia instalada y pinada con `==`.
@@ -22,7 +22,7 @@
 
 ## Phase 2: Foundational (Prerrequisitos bloqueantes)
 
-- [X] T004 Añadir `custom_dir: overrides` bajo la clave `theme:` en `mkdocs.yml`
+- [X] ~~T004 Añadir `custom_dir: overrides` bajo la clave `theme:` en `mkdocs.yml`~~ *(revertido: git no trackea directorios vacíos → fallo en CI; `custom_dir` eliminado de `mkdocs.yml`)*
 - [X] T005 Añadir plugin `git-revision-date-localized` en `mkdocs.yml` con opciones: `enable_creation_date: false`, `locale: es`, `type: date`, `fallback_to_build_date: true` — **nota**: `type: date` (no `long`) usa `babel.dates.format_date(format="long", locale="es")` internamente
 - [X] T006 Ejecutar `uv run mkdocs build --strict` y verificar cero warnings con configuración base
 
