@@ -1,11 +1,7 @@
 # Formación Claude Code + SDD (Speckit) para Java
 
-<!--
-  Sustituir <GITLAB_HOST>, <NAMESPACE>, <PROJECT>, <CI_PAGES_URL> por los valores
-  reales del proyecto GitLab antes de mergear (ver docs/publicacion.md).
--->
-[![Pipeline status](<GITLAB_HOST>/<NAMESPACE>/<PROJECT>/badges/main/pipeline.svg)](<GITLAB_HOST>/<NAMESPACE>/<PROJECT>/-/pipelines?ref=main)
-[![Sitio publicado](https://img.shields.io/badge/Pages-online-brightgreen)](<CI_PAGES_URL>)
+[![Deploy](https://github.com/luiszafra-sng/claude-code-sdd-java/actions/workflows/deploy.yml/badge.svg)](https://github.com/luiszafra-sng/claude-code-sdd-java/actions/workflows/deploy.yml)
+[![Sitio publicado](https://img.shields.io/badge/Pages-online-brightgreen)](https://luiszafra-sng.github.io/claude-code-sdd-java/)
 
 Sitio de formación en MkDocs Material sobre Claude Code y Spec-Driven
 Development con Speckit, orientado a proyectos Java (modernos con Spring
