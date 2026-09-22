@@ -16,98 +16,97 @@ completo en lugar de varias iteraciones sueltas.
 
 ## Cómo instalar
 
-CodeGraph ofrece varios métodos oficiales. Elige uno según tu contexto:
+### Paso 1 — Instalar el CLI
 
-### Método 1 — `pipx install` (recomendado)
-
-Requiere [`pipx`](https://pipx.pypa.io/) (`brew install pipx` en macOS o
-`apt install pipx` en Ubuntu 23.04+).
+**macOS / Linux (recomendado):**
 
 ```bash
-pipx install codegraph
+curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh | sh
 ```
 
-### Método 2 — `pip --user`
-
-Alternativa si no tienes `pipx`:
+**Cualquier plataforma (npm):**
 
 ```bash
-pip install --user codegraph
+npm i -g @colbymchenry/codegraph
 ```
 
-Requiere que `~/.local/bin` esté en el PATH.
+**Windows (PowerShell):**
 
-### Método 3 — Binario prebuilt desde Releases
+```powershell
+irm https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.ps1 | iex
+```
 
-Descargar el binario correspondiente al SO desde
-<https://github.com/colbymchenry/codegraph/releases>:
+!!! warning "Abre una terminal nueva antes de continuar"
+    El instalador añade `codegraph` al PATH pero no recarga el shell
+    actual. Los pasos siguientes fallarán si los ejecutas en la misma
+    terminal.
+
+### Paso 2 — Configurar los agentes
+
+En una terminal nueva:
 
 ```bash
-mkdir -p ~/.local/bin
-curl -fsSL -o codegraph.tar.gz \
-  "https://github.com/colbymchenry/codegraph/releases/latest/download/codegraph-$(uname -s)-$(uname -m).tar.gz"
-tar -xzf codegraph.tar.gz -C ~/.local/bin/
-chmod +x ~/.local/bin/codegraph
-rm codegraph.tar.gz
+codegraph install
 ```
 
-### Método 4 — Build desde fuentes
+Auto-detecta los agentes instalados (Claude Code, Cursor, Copilot…) y
+registra el servidor MCP en cada uno. Para Claude Code en concreto,
+acepta las opciones `--yes` y `--target`:
 
 ```bash
-git clone https://github.com/colbymchenry/codegraph.git
-cd codegraph
-pip install --user .
+codegraph install --yes                          # auto-detecta y configura todo
+codegraph install --target=claude --yes          # solo Claude Code
+codegraph install --yes --init                   # configura y además indexa el proyecto actual
 ```
 
-### Tabla comparativa
+### Paso 3 — Inicializar cada proyecto
 
-| Método | Requisitos | Velocidad | Facilidad de actualización | Contexto recomendado |
-|--------|------------|-----------|----------------------------|----------------------|
-| `pipx install` | `pipx` | Rápida | `pipx upgrade codegraph` | Máquina personal; aísla dependencias |
-| `pip --user` | Python 3.10+ | Rápida | `pip install --user -U codegraph` | Máquinas sin `pipx` disponible |
-| Binario prebuilt | `curl`, `tar` | Muy rápida | Manual, descargar release nueva | Air-gapped o Python no disponible |
-| Build desde fuentes | Python + git | Media | `git pull && pip install --user .` | Contribuir o versión sin publicar |
-
-### Configurar el servidor MCP en Claude Code
-
-CodeGraph expone la herramienta MCP `codegraph_explore`. Registrar el
-servidor MCP en Claude Code (una sola vez):
+En la raíz del repositorio que quieras indexar:
 
 ```bash
-claude mcp add codegraph -- codegraph mcp
+codegraph init
 ```
 
-Reiniciar la sesión de Claude Code. La herramienta queda disponible
-automáticamente cuando el proyecto activo tiene `.codegraph/`.
+Crea el directorio `.codegraph/` y construye el índice completo. El
+auto-sync está activo por defecto: CodeGraph detecta cambios en los
+archivos y actualiza el índice sin intervención manual.
+
+### Configuración MCP manual (alternativa)
+
+Si prefieres no usar `codegraph install`, añade manualmente a
+`~/.claude.json`:
+
+```json
+{
+  "mcpServers": {
+    "codegraph": {
+      "type": "stdio",
+      "command": "codegraph",
+      "args": ["serve", "--mcp"],
+      "alwaysLoad": true
+    }
+  }
+}
+```
 
 ## Verificación
 
 ```bash
-codegraph --version
+codegraph status
 ```
 
-Salida esperada: una versión semver.
-
-Crear un índice de prueba sobre un proyecto pequeño:
-
-```bash
-cd $(mktemp -d)
-git init -q .
-echo "def hello(): return 'hi'" > hello.py
-codegraph init
-ls -la .codegraph/
-```
-
-Salida esperada: directorio `.codegraph/` con al menos un archivo
-`.sqlite`.
+Muestra estadísticas del índice activo y confirma que el servidor MCP
+está operativo.
 
 Consulta ejemplo desde el shell:
 
 ```bash
+cd tu-proyecto
 codegraph explore "hello function"
 ```
 
-Debe devolver el código de la función y su ubicación.
+Debe devolver el código de la función y su ubicación con número de
+línea.
 
 ## Cuándo usarlo
 
@@ -131,19 +130,19 @@ No aporta valor en:
   proyecto, la herramienta MCP responde que no hay índice. Solución:
   `codegraph init` en la raíz. Para monorepos, pasar `projectPath`
   apuntando al subproyecto.
-- **Índice desactualizado tras cambios grandes**: `codegraph reindex`.
-  Cambios pequeños se detectan automáticamente en algunas versiones;
-  ante duda, re-indexar.
+- **Índice desactualizado**: el auto-sync cubre cambios incrementales.
+  Si el índice queda muy desfasado tras una rama grande, ejecutar
+  `codegraph init` de nuevo en la raíz del proyecto.
 - **Permisos SQLite en Linux**: si el índice queda en un directorio
   con propietario `root` (p. ej. montaje NFS), CodeGraph puede fallar
   al escribir. Ejecutar como el usuario que posee el árbol.
-- **MCP no habilitado en Claude Code**: ejecutar `claude mcp list` y
-  verificar que `codegraph` aparece. Si no, revisar el `claude mcp
-  add` y reiniciar la sesión.
+- **MCP no habilitado en Claude Code**: verificar con `claude mcp list`
+  que `codegraph` aparece. Si no, ejecutar `codegraph install
+  --target=claude --yes` y reiniciar la sesión.
 - **Tamaño del índice**: en repos grandes puede alcanzar cientos de MB.
   `.codegraph/` va en `.gitignore` por defecto.
-- **Actualizar CodeGraph**: `pipx upgrade codegraph` (o `pip install
-  --user -U codegraph` / re-descargar release).
+- **Actualizar CodeGraph**: volver a ejecutar el script de instalación
+  o `npm update -g @colbymchenry/codegraph` según el método usado.
 
 ### Ejemplo aplicado a la app CRUD Spring Boot 4
 
@@ -167,4 +166,4 @@ el NPE en una sola iteración.
 ---
 
 !!! info "Versión de referencia"
-    Documentado sobre CodeGraph `main` en `2026-09-16`. **Verificado el 2026-09-16.**
+    Documentado sobre CodeGraph `main` en `2026-09-16`. **Verificado el 2026-09-22.**

@@ -24,7 +24,7 @@ RTK ofrece varios métodos oficiales. Elige uno según tu contexto:
 ### Método 1 — Script oficial (recomendado)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh
 ```
 
 Deja el binario `rtk` en `~/.local/bin/`. Reinicia la terminal o
@@ -187,4 +187,4 @@ instalación oficial gane precedencia.
 ---
 
 !!! info "Versión de referencia"
-    Documentado sobre RTK 0.7.x. **Verificado el 2026-09-16.**
+    Documentado sobre RTK 0.7.x. **Verificado el 2026-09-22.**
